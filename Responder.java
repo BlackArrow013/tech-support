@@ -14,7 +14,7 @@ public class Responder
 {
     private Random random;
     private ArrayList<String> coleccion;
-    private HashMap<String, String> respuesta;
+    private HashMap<HashSet<String>, String> respuesta;
     /**
      * Construct a Responder - nothing to do
      */
@@ -29,10 +29,19 @@ public class Responder
         coleccion.add("Esperemos que se solucione pronto tu problema");
         coleccion.add("Un placer conocerte. Cuéntame."); 
 
-        respuesta.put("lento", "Asegúrese de no abrir demasiados programas al mismo tiempo.");
-        respuesta.put("problema", "¿Podría indicarnos qué tipo de problema tiene?");
-        respuesta.put("caro", "Lo sentimos, pero el precio no variará.");
-        respuesta.put("virus", "Si su ordenador contiene un virus, pruebe a pasarle el Avast o cualquier otro antivirus. Esa puede ser la solución.");
+        HashSet<String> opcion1 = new HashSet<String>();
+        opcion1.add("virus");
+        opcion1.add("programa");
+        HashSet<String> opcion2 = new HashSet<String>();  
+        opcion2.add("lento");
+        HashSet<String> opcion3 = new HashSet<String>(); 
+        opcion3.add("harto");
+        opcion3.add("inutil");
+        opcion3.add("programa");
+        
+        respuesta.put(opcion1, "Eso es imposible, nuestro programa no contiene ningún virus.");
+        respuesta.put(opcion2, "No trabaje con nuestro programa si tiene otros abiertos.");
+        respuesta.put(opcion3, "Cálmese, la ira no es la solución.");
     }
 
     /**
@@ -42,15 +51,8 @@ public class Responder
     public String generateResponse(HashSet<String> word)
     {
         String response = null;
-        Iterator<String> iterator = word.iterator();
-        boolean buscando = true;
-                
-        while (iterator.hasNext() && buscando) {
-            response = respuesta.get(iterator.next());
-            if (response != null) {
-                buscando = false;
-            }
-        }
+        
+        response = respuesta.get(word);
         
         if (response == null) {
             response = coleccion.get(random.nextInt(coleccion.size()));           
