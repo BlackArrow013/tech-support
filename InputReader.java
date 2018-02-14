@@ -26,12 +26,18 @@ public class InputReader
      *
      * @return  A String typed by the user.
      */
-    public String getInput()
+    public HashSet<String> getInput()
     {
         System.out.print("> ");         // print prompt
         String inputLine = reader.nextLine();
-        inputLine.length();    
+        inputLine.length();  
+        
+        HashSet<String> palabraPorPalabra = new HashSet<>();
+        String[] arrayStrings = inputLine.split(" ");
+        for (int i = 0; i < arrayStrings.length; i++) {
+            palabraPorPalabra.add(arrayStrings[i]);
+        }
        
-        return inputLine.split(" ")[0];
+        return palabraPorPalabra;
     }
 }
