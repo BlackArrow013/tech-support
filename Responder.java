@@ -43,8 +43,15 @@ public class Responder
     {
         String response = null;
         Iterator<String> iterator = word.iterator();
-        String palabraABuscar = iterator.next();
-        response = respuesta.get(palabraABuscar);
+        boolean buscando = true;
+                
+        while (iterator.hasNext() && buscando) {
+            response = respuesta.get(iterator.next());
+            if (response != null) {
+                buscando = false;
+            }
+        }
+        
         if (response == null) {
             response = coleccion.get(random.nextInt(coleccion.size()));           
         }
