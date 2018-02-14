@@ -55,7 +55,13 @@ public class Responder
         response = respuesta.get(word);
         
         if (response == null) {
-            response = coleccion.get(random.nextInt(coleccion.size()));           
+            if (coleccion.size() > 0) {
+                response = coleccion.get(random.nextInt(coleccion.size()));
+                coleccion.remove(response);
+            }
+            else {
+                response = "No te entiendo, lo siento.";
+            }
         }
         return response;
     }
